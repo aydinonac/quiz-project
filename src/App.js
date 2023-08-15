@@ -43,7 +43,7 @@ function App() {
             }>
             </Route> 
             <Route path='/result' 
-              element={<Result name={name} score={score}/>}>
+              element={<Result name={name} score={score} category="lit"/>}>
             </Route>         
           </Routes>
         <Footer />
