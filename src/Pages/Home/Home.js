@@ -7,8 +7,8 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Categories from '../../Data/Categories';
 import "./Home.css";
 console.log(Categories)
-const Home = ({name, setName, fetchQuestions}) => {
-	const [category, setCategory] = useState("");
+const Home = ({name, setName, fetchQuestions, category, updateCategory}) => {
+	
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
 
@@ -34,55 +34,56 @@ const Home = ({name, setName, fetchQuestions}) => {
 				<div className="settings_select">
 					{error && <ErrorMessage>Please fill in all the fields</ErrorMessage>}
 					<TextField
-						style={{marginBottom: 20}}
+						style={{ marginBottom: 20 }}
 						label="Enter your name: "
 						variant="outlined"
-						onChange={(e) => setName(e.target.value)}
-					/>
+						onChange={(e) => setName(e.target.value)} />
 					<TextField
 						select
 						label="Select category: "
 						variant="outlined"
-						style={{marginBottom: 20}}
-						onChange={(e) => setCategory(e.target.value)}
-						value={category}
-					>
+						style={{ marginBottom: 20 }}
+						onChange = {(e) =>  updateCategory(e.target.value)}
+						value={category}>
+					
 						{Categories.map((cat) => (
 							<MenuItem key={cat.category} value={cat.value}>
 								{cat.category}
 							</MenuItem>
-						))}
+					))}
 					</TextField>
+				
 					<TextField
-			            select
-			            label="Select Difficulty: "
-			            variant="outlined"
-			            style={{ marginBottom: 20 }}
-			            onChange={(e) => setDifficulty(e.target.value)}
+						select
+						label="Select Difficulty: "
+						variant="outlined"
+						style={{ marginBottom: 20 }}
+						onChange={(e) => setDifficulty(e.target.value)}
 						value={difficulty}
-			         >
-			            <MenuItem key="Easy" value="easy">
-			              Easy
-			            </MenuItem>
-			            <MenuItem key="Medium" value="medium">
-			              Medium
-			            </MenuItem>
-			            <MenuItem key="Hard" value="hard">
-			              Hard
-			            </MenuItem>
-			         </TextField>
-			         <Button
-			         	variant="contained"
-			         	color="primary"
-			         	size="large"
-			         	onClick={handleSubmit}
-			         	>
-			         	Start Quiz
-			         </Button>
+					>
+						<MenuItem key="Easy" value="easy">
+							Easy
+						</MenuItem>
+						<MenuItem key="Medium" value="medium">
+							Medium
+						</MenuItem>
+						<MenuItem key="Hard" value="hard">
+							Hard
+						</MenuItem>
+					</TextField>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						onClick={handleSubmit}
+					>
+						Start Quiz
+					</Button>
 				</div>
 			</div>
 			<img src={undraw_Questions_re_1fy7} className="banner" alt="quiz img" />
 		</div>
+		
 	);
 };
 

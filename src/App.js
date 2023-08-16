@@ -7,11 +7,14 @@ import Footer from "./components/Footer/Footer";
 import Home from "./Pages/Home/Home";
 import Quiz from "./Pages/Quiz/Quiz";
 import Result from "./Pages/Result/Result";
+import Categories from './Data/Categories';
 
 function App() {
   const [questions, setQuestions] = useState();
   const [name, setName] = useState("");
   const [score, setScore] = useState(0);
+// a state variable to be consumed by multiple children
+  const [category, setCategory] = useState("");
 
   const fetchQuestions = async(category = "", difficulty = "") => {
     const {data}=await axios.get(
@@ -19,6 +22,11 @@ function App() {
       }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
     );
     setQuestions(data.results);
+  }
+
+  function updateCategory(category) {
+
+      setCategory(category)
   }
 
   return (
@@ -30,6 +38,8 @@ function App() {
               name={name}
               setName={setName}
               fetchQuestions={fetchQuestions}
+              category={category}
+              updateCategory={updateCategory}
               />
             }>
             </Route> 
@@ -43,7 +53,7 @@ function App() {
             }>
             </Route> 
             <Route path='/result' 
-              element={<Result name={name} score={score} category="lit"/>}>
+              element={<Result name={name} score={score} category={category}/>}>
             </Route>         
           </Routes>
         <Footer />

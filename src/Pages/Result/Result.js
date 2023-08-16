@@ -2,6 +2,17 @@ import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {Button} from "@mui/material";
 import "./Result.css";
+import Categories from "../../Data/Categories";
+
+
+function getCategoryName(value) {
+	var found = Categories.find(function (cat) {
+		return cat.value === value
+	})
+	if (found) {
+		return found.category
+	}
+}
 
 const Result = ({name, score, category}) => {
 	const navigate = useNavigate()
@@ -13,7 +24,7 @@ const Result = ({name, score, category}) => {
 			navigate("/")
 		}
 		document.getElementById("demo").innerHTML="Results: You scored " + 
-		score + "/" + nQues + " in " + "'" + category + "'"
+		score + "/" + nQues + " in " + getCategoryName(category);
 		const canvas = document.getElementById('canvas');
 		console.log('canvas', canvas)
 		ctx = canvas.getContext('2d');
