@@ -12,7 +12,8 @@ const Question = ({
 	correct,
 	setScore,
 	score,
-	setQuestions
+	setQuestions,
+	nQues
 }) => {
 	
 	const [selected, setSelected] = useState()
@@ -34,7 +35,7 @@ const Question = ({
 	};
 
 	const handleNext = () => {
-	    if (currQues > 8) {
+	    if ((currQues > nQues - 2)) {
 	      navigate("/result");
 	    } else if (selected) {
 	      setCurrQues(currQues + 1);
@@ -60,6 +61,7 @@ const Question = ({
 						options.map((i) => (
 							<button 
 								onClick={() =>handleCheck(i)}
+			
 								className={`singleOption ${selected && handleSelect(i)}`}
 								disabled={selected}
 								key={i}

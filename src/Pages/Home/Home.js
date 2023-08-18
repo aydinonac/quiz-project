@@ -1,31 +1,40 @@
 import undraw_Questions_re_1fy7 from "./undraw_Questions_re_1fy7.png"
-import { Button, MenuItem, TextField } from "@mui/material";
+import { Backdrop, Button, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 // import { useHistory} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Categories from '../../Data/Categories';
 import "./Home.css";
+import { blueGrey } from "@mui/material/colors";
 console.log(Categories)
-const Home = ({name, setName, fetchQuestions, category, updateCategory}) => {
+const Home = ({name, setName, fetchQuestions, category, updateCategory, nQues, setNQues}) => {
 	
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
-
+	const [totalQues, setTotalQues] = useState(0);
+	const [allowStartQuiz, setAllowStartQuiz] = useState(false);
 	// const history = useHistory();
 	const navigate = useNavigate();
 
-	const handleSubmit = () => {
+	const handleSubmit = async() => {
 		if (!category || !difficulty || !name) {
 			setError(true)
 			return;
 		} else {
 			setError(false)
-			fetchQuestions(category, difficulty)
+			setTotalQues(await fetchQuestions(category, difficulty))
 			// history.push("quiz");
-			navigate("/quiz");
+			/// only going to navigate once nQues has been selected
+			// navigate("/quiz");
 		}
 	};
+
+	function setupQuiz(e) {
+		setNQues(e.target.value);
+		setAllowStartQuiz(true)
+			
+	}
 
 	return (
 		<div className="content">
@@ -48,7 +57,7 @@ const Home = ({name, setName, fetchQuestions, category, updateCategory}) => {
 					
 						{Categories.map((cat) => (
 							<MenuItem key={cat.category} value={cat.value}>
-								{cat.category}
+								{cat.category} 
 							</MenuItem>
 					))}
 					</TextField>
@@ -71,17 +80,35 @@ const Home = ({name, setName, fetchQuestions, category, updateCategory}) => {
 							Hard
 						</MenuItem>
 					</TextField>
+					
 					<Button
 						variant="contained"
 						color="primary"
 						size="large"
 						onClick={handleSubmit}
 					>
-						Start Quiz
+						Fetch Quiz
 					</Button>
+					{totalQues > 0 ? <TextField
+						style={{ marginTop: 20 }}
+						label="Number of questions (4 - 10)? "
+						variant="outlined"
+						onChange={(e) => {(e.target.value > 3 && e.target.value <= totalQues) ? 
+							setupQuiz(e) : 
+							setAllowStartQuiz(false)
+						}}
+						/> : null}
+					{allowStartQuiz ? <Button
+						variant="contained"
+						color="primary"
+						size="large"
+						onClick={() => navigate("./Quiz")}
+					>
+						Start Quiz
+					</Button> : null} 
 				</div>
 			</div>
-			<img src={undraw_Questions_re_1fy7} className="banner" alt="quiz img" />
+			<img src={undraw_Questions_re_1fy7} className="banner" alt="quiz img"/>
 		</div>
 		
 	);

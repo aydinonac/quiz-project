@@ -14,10 +14,9 @@ function getCategoryName(value) {
 	}
 }
 
-const Result = ({name, score, category}) => {
+const Result = ({name, score, category, nQues}) => {
 	const navigate = useNavigate()
 	let ctx = null
-	const nQues = 10
 	
 	useEffect(() => {
 		if (!name) {
