@@ -18,17 +18,19 @@ function App() {
 
   const fetchQuestions = async(category = "", difficulty = "") => {
     const {data}=await axios.get(
-      `https://opentdb.com/api.php?amount=10${category && `&category=${category}`
+      `https://opentdb.com/api.php?amount=30${category && `&category=${category}`
       }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
     );
+  
     setQuestions(data.results);
     return data.results ? data.results.length : 0
   }
-
+  
   function updateCategory(category) {
       setCategory(category)
   }
-
+ 
+  console.log(questions)
   return (
     <BrowserRouter>
       <div className="app">

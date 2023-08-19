@@ -29,11 +29,11 @@ const Home = ({name, setName, fetchQuestions, category, updateCategory, nQues, s
 			// navigate("/quiz");
 		}
 	};
+console.log(totalQues)
 
 	function setupQuiz(e) {
 		setNQues(e.target.value);
-		setAllowStartQuiz(true)
-			
+		setAllowStartQuiz(true)		
 	}
 
 	return (
@@ -87,13 +87,13 @@ const Home = ({name, setName, fetchQuestions, category, updateCategory, nQues, s
 						size="large"
 						onClick={handleSubmit}
 					>
-						Fetch Quiz
+						Let's get the questions.
 					</Button>
 					{totalQues > 0 ? <TextField
 						style={{ marginTop: 20 }}
-						label="Number of questions (4 - 10)? "
+						label="Number of questions (1 - 30)? "
 						variant="outlined"
-						onChange={(e) => {(e.target.value > 3 && e.target.value <= totalQues) ? 
+						onChange={(e) => {(e.target.value > 1 && e.target.value <= totalQues) ? 
 							setupQuiz(e) : 
 							setAllowStartQuiz(false)
 						}}

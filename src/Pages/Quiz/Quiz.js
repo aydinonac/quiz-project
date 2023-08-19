@@ -23,6 +23,7 @@ const Quiz = ({name, questions, score, setScore, setQuestions, nQues}) => {
 
 	if (questions) {
 		console.log(questions)
+		// console.log(questions[currQues])
 	}
 	return (
 		<div className="quiz">

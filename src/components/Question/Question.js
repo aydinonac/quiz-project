@@ -43,11 +43,11 @@ const Question = ({
 	    } else setError("Please select an option first");
 	  };
 
-	  const handleQuit = () => {
-	    setCurrQues(0);
-	    setQuestions();
-	  };
-
+	const handleQuit = () => {
+	setCurrQues(0);
+	setQuestions();
+	};
+	  
 	return (
 		<div className="question">
 			<h1>Question {currQues + 1} :</h1>
@@ -67,10 +67,12 @@ const Question = ({
 								key={i}
 								// added next line
 								dangerouslySetInnerHTML={{ __html: i }}
+								
 							>
 							</button>
 						))}
-				</div>		
+				</div>
+						
 				<div className="controls">
 					<Button
 						variant="contained"
