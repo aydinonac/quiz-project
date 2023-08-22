@@ -91,9 +91,9 @@ console.log(totalQues)
 					</Button>
 					{totalQues > 0 ? <TextField
 						style={{ marginTop: 20 }}
-						label="Number of questions (1 - 30)? "
+						label={"Number of questions (1 - "+totalQues+")? "}
 						variant="outlined"
-						onChange={(e) => {(e.target.value > 1 && e.target.value <= totalQues) ? 
+						onChange={(e) => {(e.target.value >= 1 && e.target.value <= totalQues) ? 
 							setupQuiz(e) : 
 							setAllowStartQuiz(false)
 						}}

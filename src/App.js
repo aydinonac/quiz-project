@@ -18,7 +18,7 @@ function App() {
 
   const fetchQuestions = async(category = "", difficulty = "") => {
     const {data}=await axios.get(
-      `https://opentdb.com/api.php?amount=30${category && `&category=${category}`
+      `https://questionbank-6jpv66rewq-uc.a.run.app?amount=30${category && `&category=${category}`
       }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
     );
   

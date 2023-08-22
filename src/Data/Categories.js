@@ -27,6 +27,7 @@ const Categories = [
   { category: "Japanese Anime", value: 31 },
   { category: "Cartoon and Animations", value: 32 },
   { category: "Primary Maths", value: 50},
+  { category: "Primary Computing", value: 51},
 ];
 
 export default Categories;
